@@ -1,0 +1,22 @@
+{
+  "name": "kaitodb",
+  "version": "1.1.2",
+  "description": "a simple json-db still devoloping",
+  "main": "index.js",
+  "keywords": [
+    "db",
+    "json",
+    "database",
+    "kaito"
+  ],
+  "author": "Kaito",
+  "license": "ISC",
+  "homepage": "https://kaitosoftware.skysea28957.repl.co/kaitodb/kaitodb.html",
+  "bugs": {
+    "url": "https://kaitosoftware.skysea28957.repl.co/kaitodb/bugs.html"
+  },
+  "reposity": {
+    "type": "git",
+    "url": "https://github.com/Kaito-Von-Vocaloid/kaitodb.git"
+  }
+}
