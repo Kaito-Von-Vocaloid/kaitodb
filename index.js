@@ -1,4 +1,8 @@
 module.exports = function(name){
+	const colors = [
+		"\x1b[31m",
+		"\x1b[36m%s\x1b[0m"
+	];
 	var errorControllers = function(object){
 		return([
 			["Is string?", (typeof object === 'string')],
@@ -14,10 +18,11 @@ module.exports = function(name){
 		if(!fs.existsSync(`./KaitoDataBases/${name}.json`)){
 			fs.writeFileSync(`./KaitoDataBases/${name}.json`, '{}', 'utf-8');
 		}
+		var jsonFile = require(`../../KaitoDataBases/${name}.json`);
 		this.name = name;
 		this.path = `./KaitoDataBases/${name}.json`;
 		this.set = function(key, value){
-			let setReturnValue;
+			let setReturnValue = 0; //no succes
 			if(!errorControllers(key).some(error => error[1] == false)){
 				if(value){
 					let valueReturn;
@@ -26,28 +31,37 @@ module.exports = function(name){
 					} else {
 						valueReturn = value;
 					}
-					require(`../../KaitoDataBases/${name}.json`)[key] = value;
-					setReturnValue = 'success';
+					var results = [];
+					for(var i in jsonFile){
+						results.push([i, jsonFile[i]]);
+					}
+					var jsonText = '{';
+					results.forEach(result => {
+						jsonText += `"${result[0]}": "${result[1]}",`;
+					});
+					jsonText += `"${key}": "${value}"}`;
+					fs.writeFileSync(`../../KaitoDataBases/${name}.json`, jsonText, 'utf-8');
+					setReturnValue = 1; //succes
 				} else {
-					console.error('\x1b[31m', '"value" must be defined');
-					setReturnValue = null;
+					console.error(colors[0], '"value" must be defined');
+					setReturnValue = 0;
 				}
 			} else {
-				console.error('\x1b[31m', '"key" must be an non empty string and shorter than 32 character');
+				console.error(colors[0], '"key" must be an non empty string and shorter than 32 character');
 				errorControllers(key).forEach(error => {
-					console.error('\x1b[36m%s\x1b[0m', `${error[0]}: ${error[1]}`);
+					console.error(colors[1], `${error[0]}: ${error[1]}`);
 		    });
-				setReturnValue = null;
+				setReturnValue = 0;
 			}
 			return setReturnValue;
 		};
 		this.get = function(key){
-			return(require(`../../KaitoDataBases/${name}.json`)[key]);
+			return jsonFile[key];
 		}
 	} else {
-		console.error('\x1b[31m', '"name" must be an non-empty string shorter than 32 character');
+		console.error(colors[0], '"name" must be an non-empty string shorter than 32 character');
 		errorControllers(name).forEach(error => {
-			console.error('\x1b[36m%s\x1b[0m', `${error[0]}: ${error[1]}`);
+			console.error(colors[1], `${error[0]}: ${error[1]}`);
 		});
 	}
 }
