@@ -1,7 +1,7 @@
-{
+{{
   "name": "kaitodb",
-  "version": "2.0.0",
-  "description": "a simple json-db still devoloping",
+  "version": "2.2.1",
+  "description": "a simple json-db still devoloping only supports string type datas now",
   "main": "index.js",
   "keywords": [
     "db",
@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://kaitosoftware.skysea28957.repl.co/kaitodb/bugs.html"
   },
-  "reposity": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/Kaito-Von-Vocaloid/kaitodb.git"
   }
