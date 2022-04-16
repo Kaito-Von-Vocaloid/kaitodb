@@ -40,7 +40,7 @@ module.exports = function(name){
 						jsonText += `"${result[0]}": "${result[1]}",`;
 					});
 					jsonText += `"${key}": "${value}"}`;
-					fs.writeFileSync(`../../KaitoDataBases/${name}.json`, jsonText, 'utf-8');
+					fs.writeFileSync(`./KaitoDataBases/${name}.json`, jsonText, 'utf-8');
 					setReturnValue = 1; //succes
 				} else {
 					console.error(colors[0], '"value" must be defined');
@@ -56,7 +56,9 @@ module.exports = function(name){
 			return setReturnValue;
 		};
 		this.get = function(key){
-			return jsonFile[key];
+			var readedContent = fs.readFileSync(`./KaitoDataBases/${name}.json`);
+			var parsedContent = JSON.parse(readedContent);
+			return parsedContent[key];
 		}
 	} else {
 		console.error(colors[0], '"name" must be an non-empty string shorter than 32 character');
