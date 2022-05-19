@@ -1,4 +1,4 @@
-{{
+{
   "name": "kaitodb",
   "version": "2.2.1",
   "description": "a simple json-db still devoloping only supports string type datas now",
