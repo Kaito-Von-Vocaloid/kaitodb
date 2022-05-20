@@ -21,7 +21,7 @@ console.log(MyDb.get('test_key')); //expected output: 'test_value'
 ###### value placement: `<key>`= the name of the value that will be catched from the database(type: [string](https://www.w3schools.com/js/js_strings.asp))
 #### `<kaitodb>.set(key, value)`
 ###### type: [function](https://www.w3schools.com/js/js_functions.asp)(returns: [number](https://www.w3schools.com/js/js_numbers.asp)(returning `0` means completed unsuccessfully and `1` means completed successfully))
-###### value placement: `<key>`= the name of the value that will be catched from the database(type: [string](https://www.w3schools.com/js/js_strings.asp)) `<value>` = the key that will be the value of the `<key>` in database(type: [string](https://www.w3schools.com/js/js_strings.asp) || [number](https://www.w3schools.com/js/js_numbers.asp) || [array](https://www.w3schools.com/js/js_arrays.asp) || [boolean](https://www.w3schools.com/js/js_booleans.asp))
+###### value placement: `<key>`= the name of the value that will be catched from the database(type: [string](https://www.w3schools.com/js/js_strings.asp)) `<value>` = the key that will be the value of the `<key>` in database(type: [string](https://www.w3schools.com/js/js_strings.asp) || [number](https://www.w3schools.com/js/js_numbers.asp) || [array](https://www.w3schools.com/js/js_arrays.asp) || [boolean](https://www.w3schools.com/js/js_booleans.asp) || [null](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null)(it count as empty string))
 ## Future Ideas:
 - `.env` formated database:
 <br>the idea is to make a db using env file format to store data to make it secure with the public file hosts
