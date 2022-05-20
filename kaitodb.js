@@ -31,6 +31,34 @@ module.exports = function(name){
 					} else {
 						valueReturn = value;
 					}
+					function NormalCheck(v){
+						let functionReturnValue;
+						if(typeof v === 'string'){
+	            functionReturnValue = `"${valueReturn}"`;
+	          } else {
+	            if(typeof v === 'number' || typeof v === 'boolean'){
+	              functionReturnValue = v;
+	            } else {
+	              if(Array.isArray(v)){
+									functionReturnValue = ArrayCheck(v);
+								} else {
+									functionReturnValue = null;
+								}
+	            }
+	          }
+						return functionReturnValue;
+					}
+					function ArrayCheck(v){
+						let returnArray = [];
+						for(let i = 0; i < v.length; i++){
+							v.forEach(e => returnArray.push(NormalCheck(e)));
+						}
+						return `[${returnArray}]`;
+					}
+          let newText = `"${key}": `;
+					var addVal = NormalCheck(valueReturn);
+          if(addVal == null) return console.error(colors[0], '"value" must be one of the these types:  string || number || array || boolean || null(it count as empty string)');
+					newText += addVal;
 					var results = [];
 					for(var i in jsonFile){
 						results.push([i, jsonFile[i]]);
@@ -39,7 +67,8 @@ module.exports = function(name){
 					results.forEach(result => {
 						jsonText += `"${result[0]}": "${result[1]}",`;
 					});
-					jsonText += `"${key}": "${value}"}`;
+					jsonText += newText;
+					jsonText += '}';
 					fs.writeFileSync(`./KaitoDataBases/${name}.json`, jsonText, 'utf-8');
 					setReturnValue = 1; //succes
 				} else {
@@ -67,3 +96,4 @@ module.exports = function(name){
 		});
 	}
 }
+
